@@ -1,0 +1,97 @@
+Current whole-CIS completion: about 70%.
+
+Use this checklist on the company PC to gather the highest-value FoxPro sources for integrity, migration, UI parity, and live database behavior.
+
+1. Highest-value Proforma FoxPro forms and reports
+   C:\rvs_fish\PROGRAMS\OE_B.SCX
+   C:\rvs_fish\PROGRAMS\OE_B.SCT
+   C:\rvs_fish\PROGRAMS\OE_E.SCX
+   C:\rvs_fish\PROGRAMS\OE_E.SCT
+   C:\rvs_fish\PROGRAMS\OE_E2.SCX
+   C:\rvs_fish\PROGRAMS\OE_E2.SCT
+   C:\rvs_fish\PROGRAMS\OE_E3.SCX
+   C:\rvs_fish\PROGRAMS\OE_E3.SCT
+   C:\rvs_fish\PROGRAMS\OE_P.SCX
+   C:\rvs_fish\PROGRAMS\OE_P.SCT
+   C:\rvs_fish\PROGRAMS\oe.frx
+   C:\rvs_fish\PROGRAMS\oe2.frx
+   C:\rvs_fish\PROGRAMS\oe_label.scx
+   C:\rvs_fish\PROGRAMS\oe_label.sct
+
+2. Highest-value Sales Invoice / Cover Invoice FoxPro forms and reports
+   C:\rvs_fish\PROGRAMS\sale_b.scx
+   C:\rvs_fish\PROGRAMS\sale_b.sct
+   C:\rvs_fish\PROGRAMS\sale_e.scx
+   C:\rvs_fish\PROGRAMS\sale_e.sct
+   C:\rvs_fish\PROGRAMS\sale_e2.scx
+   C:\rvs_fish\PROGRAMS\sale_e2.sct
+   C:\rvs_fish\PROGRAMS\sale_p.scx
+   C:\rvs_fish\PROGRAMS\sale_p.sct
+   C:\rvs_fish\PROGRAMS\sale_c.scx
+   C:\rvs_fish\PROGRAMS\sale_c.sct
+   C:\rvs_fish\PROGRAMS\sale_i.frx
+   C:\rvs_fish\PROGRAMS\sale_label.scx
+   C:\rvs_fish\PROGRAMS\sale_label.sct
+   C:\rvs_fish\PROGRAMS\sale_box.scx
+   C:\rvs_fish\PROGRAMS\sale_box.sct
+
+3. Highest-value pricing selector and override forms
+   C:\rvs_fish\PROGRAMS\nfile.scx
+   C:\rvs_fish\PROGRAMS\nfile.sct
+   C:\rvs_fish\PROGRAMS\sfile.scx
+   C:\rvs_fish\PROGRAMS\sfile.sct
+   C:\rvs_fish\PROGRAMS\sfile2.scx
+   C:\rvs_fish\PROGRAMS\sfile2.sct
+   C:\rvs_fish\PROGRAMS\super_s.scx
+   C:\rvs_fish\PROGRAMS\super_s.sct
+   C:\rvs_fish\PROGRAMS\CPrc_B.SCX
+   C:\rvs_fish\PROGRAMS\CPrc_B.SCT
+   C:\rvs_fish\PROGRAMS\cprc_e.scx
+   C:\rvs_fish\PROGRAMS\cprc_e.sct
+   C:\rvs_fish\PROGRAMS\cprc_b_new.scx
+   C:\rvs_fish\PROGRAMS\cprc_b_new.sct
+   C:\rvs_fish\PROGRAMS\cprc_e2.scx
+   C:\rvs_fish\PROGRAMS\cprc_e2.sct
+
+4. Highest-value DBFs
+   C:\rvs_fish\MASTER\OE_H.DBF
+   C:\rvs_fish\MASTER\OE_D.DBF
+   C:\rvs_fish\MASTER\SALE_H.DBF
+   C:\rvs_fish\MASTER\SALE_D.DBF
+   C:\rvs_fish\MASTER\SALE_C.DBF
+   C:\rvs_fish\MASTER\Product.DBF
+   C:\rvs_fish\MASTER\prod_d.dbf
+   C:\rvs_fish\MASTER\nfile.dbf
+   C:\rvs_fish\MASTER\sfile.dbf
+   C:\rvs_fish\MASTER\sfile2.dbf
+   C:\rvs_fish\MASTER\super_hd.dbf
+   C:\rvs_fish\MASTER\super_s.dbf
+   C:\rvs_fish\MASTER\cprc_d.dbf
+   C:\rvs_fish\MASTER\cprc_h.dbf
+   C:\rvs_fish\MASTER\price_d_new.dbf
+   C:\rvs_fish\MASTER\Price_H_New.dbf
+
+5. Best real-world evidence to collect
+   One real Proforma and the exact Sales Invoice created from it
+   One Proforma that is already invoiced or locked
+   One printed or exported Cover Invoice sample
+   One cancel/recall approval example from FoxPro
+   One invoice record that uses specials or invertibrate items
+   One Proforma where the OE_E3 price picker was used
+   One Sales Invoice using Local pricing
+   One Sales Invoice using contract-price override
+
+6. Best migration and integrity references
+   Latest C:\rvs_fish snapshot used by the company
+   Current FoxPro user account list if separate from Java users
+   Any batch file or shortcut the company uses to launch FoxPro
+   Any server IP, database hostname, or old backup path used by the company
+   A copy of the latest SQL backup if the company already has one
+   One real receiving row with a posted C.V. so the Java receiving/disbursement balance rules can be matched
+   One real invoice whose source Proforma is cancelled, recalled, or reopened so the state transition can be verified
+
+7. If you can only gather a few items first
+   Gather OE_H.DBF, OE_D.DBF, SALE_H.DBF, SALE_D.DBF, SALE_C.DBF
+   Gather OE_E*.SCX/SCT and sale_e*.SCX/SCT
+   Gather nfile.dbf, sfile.dbf, super_s.dbf, cprc_d.dbf, and price_d_new.dbf
+   Gather one real Proforma-to-Invoice example

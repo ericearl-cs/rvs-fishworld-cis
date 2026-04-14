@@ -1,0 +1,3 @@
+db.url=jdbc:mysql://COMPANY_SERVER_IP:3306/rvs_fishworld
+db.username=rvs_app
+db.password=strong_password_here

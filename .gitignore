@@ -1,0 +1,9 @@
+out/
+logs/
+recovery_staging/
+publish_snapshot/
+.vscode/
+.settings/
+config.properties
+*.class
+*.log

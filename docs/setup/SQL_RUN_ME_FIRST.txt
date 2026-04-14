@@ -1,0 +1,34 @@
+RVS FISHWORLD SQL SETUP GUIDE
+
+If your project folder is:
+C:\Users\gepil\rvscisver1
+
+Then type these exact commands in MySQL Command Line Client:
+
+USE rvs_fishworld;
+SOURCE C:/Users/gepil/rvscisver1/sql/04_receiving_patch.sql;
+SOURCE C:/Users/gepil/rvscisver1/sql/05_load_product_costs.sql;
+SOURCE C:/Users/gepil/rvscisver1/sql/06_receiving_foxpro_fix.sql;
+SOURCE C:/Users/gepil/rvscisver1/sql/07_disbursement_wiring.sql;
+
+Then verify product 30001S exactly like this:
+
+SELECT product_code, description, average_cost, previous_cost
+FROM products
+WHERE product_code = '30001S';
+
+If you are building the database from scratch, run this exact order:
+
+SOURCE C:/Users/gepil/rvscisver1/sql/01_schema.sql;
+USE rvs_fishworld;
+SOURCE C:/Users/gepil/rvscisver1/sql/02_seed_demo.sql;
+SOURCE C:/Users/gepil/rvscisver1/sql/03_seed_rvs_master_data.sql;
+SOURCE C:/Users/gepil/rvscisver1/sql/04_receiving_patch.sql;
+SOURCE C:/Users/gepil/rvscisver1/sql/05_load_product_costs.sql;
+SOURCE C:/Users/gepil/rvscisver1/sql/06_receiving_foxpro_fix.sql;
+SOURCE C:/Users/gepil/rvscisver1/sql/07_disbursement_wiring.sql;
+
+CURRENT config.properties values:
+db.url=jdbc:mysql://localhost:3306/rvs_fishworld
+db.username=root
+db.password=o9940335747/

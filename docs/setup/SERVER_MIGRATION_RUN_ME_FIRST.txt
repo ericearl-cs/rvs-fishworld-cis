@@ -1,0 +1,94 @@
+RVS FISHWORLD SERVER MIGRATION GUIDE
+
+CURRENT STRATEGY
+- FoxPro is still the live system.
+- C:\rvs_fish is the source snapshot for Java/MySQL imports.
+- Keep refreshing the local Java/MySQL database from C:\rvs_fish until cutover day.
+- For production, use one shared MySQL server for all company PCs.
+- Recommended go-live package:
+  keep master/support data, clear old transaction history, keep only the latest DAY_INV opening stock snapshot.
+
+LOCAL / SERVER CONFIG SPLIT
+- Local default:
+  config.properties
+- Optional local override:
+  config.local.properties
+- Server-specific config:
+  config.server.properties
+
+The app now supports a config override through either:
+- system property: -Drvs.config=path_to_properties_file
+- environment variable: RVS_CONFIG=path_to_properties_file
+
+EXAMPLE SERVER CONFIG
+1. Copy:
+   config.server.properties.example
+2. Rename it to:
+   config.server.properties
+3. Fill the real server values.
+
+RUN AGAINST THE SERVER
+Example:
+java -Drvs.config=config.server.properties -cp "out;lib\mysql-connector-j-9.6.0.jar" com.rvsfishworld.App
+
+IMPORT FOXPRO DATA INTO THE SERVER
+Example:
+java -Drvs.config=config.server.properties -cp "out;lib\mysql-connector-j-9.6.0.jar" com.rvsfishworld.tools.CisDataImporter --mode=full-mirror
+
+PACKAGE A FRESH GO-LIVE DATABASE
+- Local:
+  package_go_live_data.bat
+- Server:
+  package_go_live_data_server.bat
+
+Fresh go-live mode:
+- keeps master/support data
+- clears receiving, C.V., sales, mortality, and other business history
+- keeps only the latest DAY_INV snapshot as opening stock
+- does not carry FoxPro open balances into Java
+
+RECOMMENDED FIRST MIGRATION FLOW
+1. Refresh and verify the local database from C:\rvs_fish:
+   import_cis_data.bat
+2. Check:
+   logs\cis_import_report_latest.txt
+3. Package the database for a fresh Java go-live:
+   package_go_live_data.bat
+4. Check again:
+   logs\cis_import_report_latest.txt
+5. Freeze the export moment.
+6. Export the verified local database:
+   mysqldump -u root -p --single-transaction --routines --triggers rvs_fishworld > C:\backup\rvs_fishworld.sql
+7. Restore to the company server:
+   mysql -h COMPANY_SERVER_IP -u rvs_app -p rvs_fishworld < C:\backup\rvs_fishworld.sql
+8. Test one client using:
+   -Drvs.config=config.server.properties
+9. After validation, point all company PCs to the same server DB.
+
+OPTIONAL DIRECT SERVER IMPORT
+If you want to skip dump/restore and import straight to the company server:
+1. Create config.server.properties
+2. Run:
+   java -Drvs.config=config.server.properties -cp "out;lib\mysql-connector-j-9.6.0.jar" com.rvsfishworld.tools.CisDataImporter --mode=full-mirror
+3. Then package the server database:
+   package_go_live_data_server.bat
+
+DATABASE SECURITY BASELINE
+- Do not use root in production.
+- Create a dedicated app account, for example:
+  CREATE USER 'rvs_app'@'%' IDENTIFIED BY 'strong_password_here';
+  GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, INDEX ON rvs_fishworld.* TO 'rvs_app'@'%';
+  FLUSH PRIVILEGES;
+- Restrict host access to company IPs if possible.
+- Keep server backups scheduled.
+
+CUTOVER DAY
+1. Get the latest C:\rvs_fish snapshot from the FoxPro machine.
+2. Run one final verified import.
+3. Review logs\cis_import_report_latest.txt.
+4. Run fresh go-live packaging.
+5. Review logs\cis_import_report_latest.txt again.
+6. Export the verified DB.
+7. Restore to the company server.
+8. Switch Java clients to the server config.
+9. Stop treating FoxPro as the live write target.

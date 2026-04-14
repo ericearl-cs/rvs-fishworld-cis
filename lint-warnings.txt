@@ -1,0 +1,302 @@
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\App.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\AppRuntime.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\model\AppSession.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\model\UserAccount.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\dao\AppUserDAO.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\dao\AuditDAO.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\dao\CompanyProfileDAO.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\dao\DisbursementDAO.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\model\DisbursementHeader.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\model\DisbursementLine.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\dao\GenericDocumentDAO.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\model\GenericDocumentRecord.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\dao\LookupDAO.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\dao\MasterFileDAO.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\dao\MortalityDAO.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\model\MortalityRecord.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\model\MortalityLine.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\dao\OperationalTableDAO.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\generic\CrudTableConfig.java:4: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\dao\ReceivingDAO.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\model\ReceivingHeader.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\model\ReceivingLine.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\model\ReceivingRuleCheck.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\dao\SalesWorkflowDAO.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\model\ProformaRecord.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\model\SalesInvoiceRecord.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\model\SalesInvoiceLine.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\model\ProformaLine.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\dao\SpecialOfWeekDAO.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\dao\UtilityService.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\db\AppBootstrap.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\db\Database.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\db\DatabaseConfig.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\db\LegacyDbfReader.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\db\PasswordUtil.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\tools\ApprovedScopeMirrorService.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\tools\CisDataImporter.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\tools\CisImportReportTool.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\tools\LegacyDbfInspector.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\chrome\FoxProChildDialog.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\admin\AdminApprovalPromptDialog.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\admin\AdminApprovalPromptDialog.java:24: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        buildUi();
+               ^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\admin\AdminApprovalPromptDialog.java:41: warning: [this-escape] previous possible 'this' escape happens here via invocation
+        btnAccept.addActionListener(e -> {
+                                    ^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\chrome\FoxProChildDialog.java:21: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setResizable(false);
+                    ^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\admin\ApprovalPasswordDialog.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\admin\ApprovalPasswordDialog.java:28: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        buildUi();
+               ^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\admin\ApprovalPasswordDialog.java:50: warning: [this-escape] previous possible 'this' escape happens here via invocation
+        save.addActionListener(e -> {
+                               ^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\generic\DataBrowseInternalFrame.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\generic\DataBrowseInternalFrame.java:73: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        ReceivingCisChrome.installInternalFrameChrome(this);
+                                                      ^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\widgets\ReceivingBrowseTable.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\widgets\ReceivingBrowseTable.java:68: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setModel(model);
+                ^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\admin\CompanyProfileDialog.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\admin\CompanyProfileDialog.java:44: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        buildUi();
+               ^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\admin\CompanyProfileDialog.java:78: warning: [this-escape] previous possible 'this' escape happens here via invocation
+        save.addActionListener(e -> save());
+                               ^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\admin\LoginDialog.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\admin\LoginDialog.java:29: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setResizable(false);
+                    ^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\admin\UserAccountDialog.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\admin\UserAccountDialog.java:32: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        buildUi(user, readOnly);
+               ^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\admin\UserAccountDialog.java:76: warning: [this-escape] previous possible 'this' escape happens here via invocation
+            save.addActionListener(e -> {
+                                   ^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\admin\UserRightsInternalFrame.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\chrome\CisDesktopPane.java:23: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setOpaque(true);
+                 ^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\core\CisDialogs.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\core\CisModuleFactory.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\core\CisTheme.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\core\FormLayoutSupport.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\core\MainMenuFrame.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\core\MainMenuFrame.java:48: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                                ^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\core\ReceivingCisDialogs.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\generic\ApprovedDocumentInternalFrame.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\generic\ApprovedMasterBrowseInternalFrame.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\generic\CompactApprovedTableInternalFrame.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\generic\CompactApprovedTableInternalFrame.java:52: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        ReceivingCisChrome.installInternalFrameChrome(this);
+                                                      ^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\generic\CompactCrudDialog.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\generic\CompactCrudDialog.java:34: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        buildUi(readOnly);
+               ^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\generic\CompactCrudDialog.java:54: warning: [this-escape] previous possible 'this' escape happens here via invocation
+            accept.addActionListener(e -> onSave());
+                                     ^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\generic\GenericDocumentEntryDialog.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\generic\GenericDocumentEntryDialog.java:39: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        buildUi(readOnly);
+               ^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\generic\GenericDocumentEntryDialog.java:86: warning: [this-escape] previous possible 'this' escape happens here via invocation
+            save.addActionListener(e -> {
+                                   ^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\generic\GenericDocumentInternalFrame.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\generic\LookupDialog.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\generic\LookupDialog.java:43: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        buildUi();
+               ^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\generic\LookupDialog.java:55: warning: [this-escape] previous possible 'this' escape happens here via invocation
+        btnSelect.addActionListener(e -> selectCurrent());
+                                    ^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\generic\PlaceholderInternalFrame.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\generic\PlaceholderInternalFrame.java:53: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        ReceivingCisChrome.installInternalFrameChrome(this);
+                                                      ^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\master\CategoryMasterInternalFrame.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\master\SimpleMasterRecordDialog.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\master\SimpleMasterRecordDialog.java:56: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        buildUi(clientWidth, clientHeight, values == null ? Map.of() : values, readOnly);
+               ^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\master\SimpleMasterRecordDialog.java:87: warning: [this-escape] previous possible 'this' escape happens here via invocation
+            save.addActionListener(e -> onSave());
+                                   ^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\master\CustomerMasterInternalFrame.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\master\CustomerRecordDialog.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\master\CustomerRecordDialog.java:33: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        buildUi(readOnly);
+               ^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\master\CustomerRecordDialog.java:57: warning: [this-escape] previous possible 'this' escape happens here via invocation
+            save.addActionListener(e -> onSave());
+                                   ^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\master\OperationalRecordDialog.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\master\OperationalRecordDialog.java:28: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        buildUi(fields, values == null ? Map.of() : values, readOnly);
+               ^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\master\OperationalRecordDialog.java:65: warning: [this-escape] previous possible 'this' escape happens here via invocation
+            save.addActionListener(e -> {
+                                   ^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\master\OperationalTableInternalFrame.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\master\ProductMasterInternalFrame.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\master\ProductRecordDialog.java:3: warning: [dangling-doc-comments] documentation comment is not attached to any declaration
+/**
+^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\master\ProductRecordDialog.java:34: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        buildUi();
+               ^
+C:\Users\gepil\rvscisver1\src\com\rvsfishworld\ui\master\ProductRecordDialog.java:91: warning: [this-escape] previous possible 'this' escape happens here via invocation
+            save.addActionListener(e -> onSave());
+                                   ^
+100 warnings
+only showing the first 100 warnings, of 173 total; use -Xmaxwarns if you would like to see more
