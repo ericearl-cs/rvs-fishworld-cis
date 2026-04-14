@@ -77,11 +77,51 @@ public class LookupDAO {
         return findItems(sql, keyword);
     }
 
+    public List<LookupItem> findCategories(String keyword) {
+        String sql = """
+                SELECT category_id, category_code, category_name
+                FROM categories
+                WHERE category_code LIKE ? OR category_name LIKE ?
+                ORDER BY category_code
+                """;
+        return findItems(sql, keyword);
+    }
+
+    public List<LookupItem> findBrands(String keyword) {
+        String sql = """
+                SELECT brand_id, brand_code, brand_name
+                FROM brands
+                WHERE brand_code LIKE ? OR brand_name LIKE ?
+                ORDER BY brand_code
+                """;
+        return findItems(sql, keyword);
+    }
+
     public LookupItem findProductByCode(String code) {
         String sql = """
                 SELECT product_id, product_code, description
                 FROM products
                 WHERE product_code = ? AND is_active = TRUE
+                LIMIT 1
+                """;
+        return findOne(sql, code);
+    }
+
+    public LookupItem findCategoryByCode(String code) {
+        String sql = """
+                SELECT category_id, category_code, category_name
+                FROM categories
+                WHERE category_code = ?
+                LIMIT 1
+                """;
+        return findOne(sql, code);
+    }
+
+    public LookupItem findBrandByCode(String code) {
+        String sql = """
+                SELECT brand_id, brand_code, brand_name
+                FROM brands
+                WHERE brand_code = ?
                 LIMIT 1
                 """;
         return findOne(sql, code);

@@ -1,6 +1,7 @@
 package com.rvsfishworld.ui.chrome;
 
 import com.rvsfishworld.ui.FoxProTheme;
+import com.rvsfishworld.ui.core.CisScale;
 import java.awt.Dimension;
 import java.awt.Window;
 import javax.swing.JDialog;
@@ -11,7 +12,7 @@ public class FoxProChildDialog extends JDialog {
         super(owner, title, ModalityType.APPLICATION_MODAL);
         FoxProTheme.applyGlobalFont();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setSize(new Dimension(width, height));
+        setSize(new Dimension(CisScale.scale(width), CisScale.scale(height)));
         setLocationRelativeTo(owner);
     }
 }

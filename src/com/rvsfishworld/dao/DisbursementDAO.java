@@ -40,6 +40,10 @@ public class DisbursementDAO {
     }
 
     public void save(DisbursementHeader header, long receivingId, String rrNo, BigDecimal rrAmount, String remarks) {
+        save(header, receivingId, rrNo, rrAmount, rrAmount, remarks);
+    }
+
+    public void save(DisbursementHeader header, long receivingId, String rrNo, BigDecimal fishPurchaseAmount, BigDecimal totalAmount, String remarks) {
         String supplierSql = "SELECT supplier_id FROM suppliers WHERE supplier_code = ? LIMIT 1";
         String insertHeaderSql = """
                 INSERT INTO disbursements (
@@ -80,8 +84,8 @@ public class DisbursementDAO {
                     ps.setLong(2, supplierId);
                     ps.setDate(3, java.sql.Date.valueOf(header.getCvDate()));
                     ps.setString(4, remarks);
-                    ps.setBigDecimal(5, rrAmount);
-                    ps.setBigDecimal(6, rrAmount);
+                    ps.setBigDecimal(5, fishPurchaseAmount);
+                    ps.setBigDecimal(6, totalAmount);
                     ps.executeUpdate();
                     try (ResultSet rs = ps.getGeneratedKeys()) {
                         if (!rs.next()) {
@@ -95,15 +99,15 @@ public class DisbursementDAO {
                     ps.setLong(1, disbursementId);
                     ps.setLong(2, receivingId);
                     ps.setString(3, rrNo);
-                    ps.setBigDecimal(4, rrAmount);
-                    ps.setBigDecimal(5, rrAmount);
+                    ps.setBigDecimal(4, totalAmount);
+                    ps.setBigDecimal(5, totalAmount);
                     ps.setString(6, remarks);
                     ps.executeUpdate();
                 }
 
                 try (PreparedStatement ps = conn.prepareStatement(updateReceivingSql)) {
-                    ps.setBigDecimal(1, rrAmount);
-                    ps.setBigDecimal(2, rrAmount);
+                    ps.setBigDecimal(1, totalAmount);
+                    ps.setBigDecimal(2, totalAmount);
                     ps.setLong(3, receivingId);
                     ps.executeUpdate();
                 }

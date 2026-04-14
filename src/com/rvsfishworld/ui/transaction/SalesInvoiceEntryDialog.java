@@ -8,75 +8,76 @@ import com.rvsfishworld.model.SalesInvoiceRecord;
 import com.rvsfishworld.ui.FoxProTheme;
 import com.rvsfishworld.ui.chrome.FoxProChildDialog;
 import com.rvsfishworld.ui.core.CisDialogs;
+import com.rvsfishworld.ui.core.CisScale;
 import com.rvsfishworld.ui.generic.LookupDialog;
-import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.Window;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 @SuppressWarnings("serial")
 public class SalesInvoiceEntryDialog extends FoxProChildDialog {
+    private static final String[] PRICING_OPTIONS = {
+            "A", "B - US/SQ/EU", "C", "D", "E", "F", "G", "S", "L"
+    };
+
     private final SalesWorkflowDAO workflowDAO = new SalesWorkflowDAO();
     private final LookupDAO lookupDAO = new LookupDAO();
     private SalesInvoiceRecord record;
     private boolean saved;
     private boolean suppressUpdates;
 
-    private final JTextField txtProformaNo = FoxProTheme.createTextField(10);
-    private final JTextField txtInvoiceNo = FoxProTheme.createTextField(10);
-    private final JTextField txtInvoiceDate = FoxProTheme.createTextField(10);
-    private final JTextField txtExchangeRate = FoxProTheme.createTextField(8);
-    private final JTextField txtAwbNo = FoxProTheme.createTextField(12);
-    private final JTextField txtBroker = FoxProTheme.createTextField(16);
-    private final JTextField txtCustomerCode = FoxProTheme.createTextField(10);
-    private final JTextField txtCustomerName = FoxProTheme.createTextField(30);
-    private final JTextField txtBranchCode = FoxProTheme.createTextField(8);
-    private final JTextField txtBranchName = FoxProTheme.createTextField(22);
-    private final JTextField txtSalesmanCode = FoxProTheme.createTextField(8);
-    private final JTextField txtSalesmanName = FoxProTheme.createTextField(22);
-    private final JTextField txtCurrencyCode = FoxProTheme.createTextField(6);
-    private final JTextField txtCurrencyName = FoxProTheme.createTextField(20);
-    private final JComboBox<String> cboPricing = new JComboBox<>(new String[]{"A", "B", "C", "D", "E", "F", "G", "S", "L"});
+    private final JTextField txtProformaNo = field(10);
+    private final JTextField txtInvoiceNo = field(10);
+    private final JTextField txtInvoiceDate = field(10);
+    private final JTextField txtExchangeRate = numericField(8);
+    private final JTextField txtAwbNo = field(12);
+    private final JTextField txtBroker = field(16);
+    private final JTextField txtCustomerCode = field(10);
+    private final JTextField txtCustomerName = field(28);
+    private final JTextField txtBranchCode = field(8);
+    private final JTextField txtBranchName = field(22);
+    private final JTextField txtSalesmanCode = field(8);
+    private final JTextField txtSalesmanName = field(22);
+    private final JTextField txtCurrencyCode = field(6);
+    private final JTextField txtCurrencyName = field(18);
+    private final JComboBox<String> cboPricing = new JComboBox<>(PRICING_OPTIONS);
     private final JCheckBox chkApplyFormula = new JCheckBox("Apply Formula");
     private final JCheckBox chkConsumables = new JCheckBox("Consumables");
-    private final JTextField txtBoxQty = FoxProTheme.createTextField(8);
-    private final JTextField txtKgs = FoxProTheme.createTextField(8);
-    private final JTextField txtFishCost = FoxProTheme.createTextField(8);
-    private final JTextField txtDiscAmount = FoxProTheme.createTextField(8);
-    private final JTextField txtMisc = FoxProTheme.createTextField(8);
-    private final JTextField txtSsc = FoxProTheme.createTextField(8);
-    private final JTextField txtRate = FoxProTheme.createTextField(8);
-    private final JTextField txtVat = FoxProTheme.createTextField(8);
-    private final JTextField txtStamp = FoxProTheme.createTextField(8);
-    private final JTextField txtPreparedBy = FoxProTheme.createTextField(12);
-    private final JTextField txtCheckedBy = FoxProTheme.createTextField(12);
-    private final JTextField txtApprovedBy = FoxProTheme.createTextField(12);
-    private final JTextField txtReceivedBy = FoxProTheme.createTextField(12);
-    private final JTextField txtDiscountPercent = FoxProTheme.createTextField(8);
-    private final JTextField txtDoa = FoxProTheme.createTextField(8);
-    private final JTextField txtRate2 = FoxProTheme.createTextField(8);
-    private final JTextField txtFreight = FoxProTheme.createTextField(8);
-    private final JTextField txtPackingCharges = FoxProTheme.createTextField(8);
-    private final JTextField txtProductSales = FoxProTheme.createTextField(10);
-    private final JTextField txtTotalPayables = FoxProTheme.createTextField(10);
+    private final JTextField txtBoxQty = numericField(8);
+    private final JTextField txtKgs = numericField(8);
+    private final JTextField txtFishCost = numericField(8);
+    private final JTextField txtDiscAmount = numericField(8);
+    private final JTextField txtMisc = numericField(8);
+    private final JTextField txtSsc = numericField(8);
+    private final JTextField txtRate = numericField(8);
+    private final JTextField txtVat = numericField(8);
+    private final JTextField txtStamp = numericField(8);
+    private final JTextField txtPreparedBy = field(12);
+    private final JTextField txtCheckedBy = field(12);
+    private final JTextField txtApprovedBy = field(12);
+    private final JTextField txtReceivedBy = field(12);
+    private final JTextField txtDiscountPercent = numericField(8);
+    private final JTextField txtDoa = numericField(8);
+    private final JTextField txtRate2 = numericField(8);
+    private final JTextField txtFreight = numericField(8);
+    private final JTextField txtPackingCharges = numericField(8);
+    private final JTextField txtProductSales = numericField(10);
+    private final JTextField txtTotalPayables = numericField(10);
 
     private final DefaultTableModel lineModel = new DefaultTableModel(
             new Object[]{"Tran-Shipper", "BOX", "Product No.", "Description", "SPECIAL", "Qty. Sold", "Selling Price", "Total Price"}, 0) {
@@ -92,12 +93,13 @@ public class SalesInvoiceEntryDialog extends FoxProChildDialog {
     }
 
     public SalesInvoiceEntryDialog(Window owner, SalesInvoiceRecord source) {
-        super(owner, "Adding Of Product Sales", 1260, 820);
+        super(owner, "Adding Of Product Sales", 1040, 690);
         this.record = source == null ? new SalesInvoiceRecord() : source;
         if (this.record.getInvoiceDate() == null) {
             this.record.setInvoiceDate(LocalDate.now());
         }
         setContentPane(buildContent());
+        bindUi();
         loadRecordToFields();
         refreshGrid();
     }
@@ -111,199 +113,201 @@ public class SalesInvoiceEntryDialog extends FoxProChildDialog {
     }
 
     private JPanel buildContent() {
-        JPanel root = new JPanel(new BorderLayout(10, 10));
+        JPanel root = new JPanel(null);
         root.setBackground(FoxProTheme.PANEL);
-        root.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        root.add(buildHeader(), BorderLayout.NORTH);
-        root.add(buildGridPanel(), BorderLayout.CENTER);
-        root.add(buildFooter(), BorderLayout.SOUTH);
+        root.setPreferredSize(new Dimension(CisScale.scale(1040), CisScale.scale(690)));
+
+        buildHeader(root);
+        buildTotalsStrip(root);
+        buildGrid(root);
+        buildFooter(root);
         return root;
     }
 
-    private JPanel buildHeader() {
-        JPanel wrapper = new JPanel(new BorderLayout(8, 8));
-        wrapper.setBackground(FoxProTheme.PANEL);
-
-        JPanel form = new JPanel(new GridBagLayout());
-        form.setBackground(FoxProTheme.PANEL);
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(4, 6, 4, 6);
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-
-        addField(form, gbc, 0, 0, "Proforma No.", txtProformaNo, lookupButton(this::openProformaLookup), null);
-        addField(form, gbc, 1, 0, "Invoice No.", txtInvoiceNo, null, null);
-        addField(form, gbc, 2, 0, "Invoice Date", txtInvoiceDate, null, null);
-        addField(form, gbc, 3, 0, "Exchange Rate", txtExchangeRate, null, null);
-        addField(form, gbc, 4, 0, "AWB #", txtAwbNo, null, null);
-        addField(form, gbc, 5, 0, "BROKER", txtBroker, null, null);
-
-        addField(form, gbc, 0, 3, "Customer", txtCustomerCode, lookupButton(this::openCustomerLookup), txtCustomerName);
-        addField(form, gbc, 1, 3, "Branch", txtBranchCode, lookupButton(this::openBranchLookup), txtBranchName);
-        addField(form, gbc, 2, 3, "Salesman", txtSalesmanCode, lookupButton(this::openSalesmanLookup), txtSalesmanName);
-        addField(form, gbc, 3, 3, "Currency", txtCurrencyCode, lookupButton(this::openCurrencyLookup), txtCurrencyName);
-
-        gbc.gridx = 3;
-        gbc.gridy = 4;
-        gbc.weightx = 0;
-        form.add(new JLabel("Pricing"), gbc);
-        gbc.gridx = 4;
-        gbc.weightx = 0.2;
-        cboPricing.setFont(FoxProTheme.FONT);
-        form.add(cboPricing, gbc);
-        gbc.gridx = 5;
-        gbc.weightx = 0;
+    private void bindUi() {
         chkApplyFormula.setBackground(FoxProTheme.PANEL);
-        form.add(chkApplyFormula, gbc);
-        gbc.gridx = 6;
         chkConsumables.setBackground(FoxProTheme.PANEL);
-        form.add(chkConsumables, gbc);
-
-        JPanel metrics = new JPanel(new GridBagLayout());
-        metrics.setBackground(FoxProTheme.PANEL);
-        metrics.setBorder(FoxProTheme.sectionBorder("Totals Strip"));
-        addMetric(metrics, 0, "BOX QTY.", txtBoxQty);
-        addMetric(metrics, 1, "KGS.", txtKgs);
-        addMetric(metrics, 2, "FISH COST", txtFishCost);
-        addMetric(metrics, 3, "DISC", txtDiscAmount);
-        addMetric(metrics, 4, "MISC.", txtMisc);
-        addMetric(metrics, 5, "SSC", txtSsc);
-        addMetric(metrics, 6, "RATE", txtRate);
-        addMetric(metrics, 7, "VAT", txtVat);
-        addMetric(metrics, 8, "STAMP", txtStamp);
-
+        cboPricing.setFont(FoxProTheme.FONT);
         cboPricing.addActionListener(e -> queueApplyFormula());
         chkApplyFormula.addActionListener(e -> queueApplyFormula());
-
-        wrapper.add(form, BorderLayout.NORTH);
-        wrapper.add(metrics, BorderLayout.SOUTH);
-        return wrapper;
     }
 
-    private JPanel buildGridPanel() {
-        JPanel panel = new JPanel(new BorderLayout(8, 8));
-        panel.setBackground(FoxProTheme.PANEL);
+    private void buildHeader(JPanel root) {
+        addLabel(root, "Proforma No.", 16, 18, 64);
+        placeField(root, txtProformaNo, 92, 14, 96, 22);
+        addLookupButton(root, 191, 14, this::openProformaLookup);
+
+        addLabel(root, "Invoice No.", 16, 46, 64);
+        placeField(root, txtInvoiceNo, 92, 42, 96, 22);
+
+        addLabel(root, "Invoice Date", 16, 74, 64);
+        placeField(root, txtInvoiceDate, 92, 70, 96, 22);
+
+        addLabel(root, "Exchange Rate", 16, 102, 74);
+        placeField(root, txtExchangeRate, 92, 98, 96, 22);
+
+        addLabel(root, "AWB #", 16, 130, 42);
+        placeField(root, txtAwbNo, 92, 126, 128, 22);
+
+        addLabel(root, "BROKER", 16, 158, 48);
+        placeField(root, txtBroker, 92, 154, 128, 22);
+
+        addLabel(root, "Customer", 462, 18, 54);
+        placeField(root, txtCustomerCode, 530, 14, 58, 22);
+        addLookupButton(root, 591, 14, this::openCustomerLookup);
+        placeReadOnly(root, txtCustomerName, 619, 14, 305, 22);
+
+        addLabel(root, "Branch", 462, 46, 54);
+        placeField(root, txtBranchCode, 530, 42, 58, 22);
+        addLookupButton(root, 591, 42, this::openBranchLookup);
+        placeReadOnly(root, txtBranchName, 619, 42, 305, 22);
+
+        addLabel(root, "Salesman", 462, 74, 54);
+        placeField(root, txtSalesmanCode, 530, 70, 58, 22);
+        addLookupButton(root, 591, 70, this::openSalesmanLookup);
+        placeReadOnly(root, txtSalesmanName, 619, 70, 305, 22);
+
+        addLabel(root, "Currency", 462, 102, 54);
+        placeField(root, txtCurrencyCode, 530, 98, 40, 22);
+        addLookupButton(root, 573, 98, this::openCurrencyLookup);
+        placeReadOnly(root, txtCurrencyName, 601, 98, 323, 22);
+
+        addLabel(root, "Pricing", 462, 136, 48);
+        cboPricing.setBounds(s(530), s(130), s(175), s(24));
+        root.add(cboPricing);
+        chkApplyFormula.setBounds(s(715), s(132), s(100), s(20));
+        root.add(chkApplyFormula);
+        chkConsumables.setBounds(s(816), s(132), s(110), s(20));
+        root.add(chkConsumables);
+    }
+
+    private void buildTotalsStrip(JPanel root) {
+        String[] labels = {"BOX QTY.", "KGS.", "FISH COST", "DISC", "MISC.", "SSC", "RATE", "VAT", "STAMP"};
+        JTextField[] fields = {txtBoxQty, txtKgs, txtFishCost, txtDiscAmount, txtMisc, txtSsc, txtRate, txtVat, txtStamp};
+        int x = 16;
+        for (int i = 0; i < labels.length; i++) {
+            addCenteredLabel(root, labels[i], x, 198, 94);
+            placeField(root, fields[i], x, 218, 92, 22);
+            x += 102;
+        }
+    }
+
+    private void buildGrid(JPanel root) {
         FoxProTheme.styleTable(lineTable);
-        lineTable.setRowHeight(24);
-        panel.add(new JScrollPane(lineTable), BorderLayout.CENTER);
+        lineTable.setRowHeight(CisScale.scale(18));
+        lineTable.setSelectionBackground(new Color(246, 142, 255));
+        lineTable.setSelectionForeground(Color.BLACK);
+        int[] widths = {84, 38, 82, 250, 60, 62, 78, 86};
+        for (int i = 0; i < widths.length; i++) {
+            lineTable.getColumnModel().getColumn(i).setPreferredWidth(CisScale.scale(widths[i]));
+        }
+        DefaultTableCellRenderer right = new DefaultTableCellRenderer();
+        right.setHorizontalAlignment(SwingConstants.RIGHT);
+        lineTable.getColumnModel().getColumn(5).setCellRenderer(right);
+        lineTable.getColumnModel().getColumn(6).setCellRenderer(right);
+        lineTable.getColumnModel().getColumn(7).setCellRenderer(right);
 
-        JPanel boxPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 8, 0));
-        boxPanel.setBackground(FoxProTheme.PANEL);
+        JScrollPane scrollPane = new JScrollPane(lineTable);
+        scrollPane.getViewport().setBackground(Color.WHITE);
+        scrollPane.setBounds(s(16), s(248), s(908), s(270));
+        root.add(scrollPane);
+    }
+
+    private void buildFooter(JPanel root) {
+        addLabel(root, "Prep.by", 20, 545, 46);
+        placeField(root, txtPreparedBy, 76, 541, 88, 22);
+        addLabel(root, "Check by", 20, 573, 46);
+        placeField(root, txtCheckedBy, 76, 569, 88, 22);
+        addLabel(root, "App.by", 20, 601, 46);
+        placeField(root, txtApprovedBy, 76, 597, 88, 22);
+        addLabel(root, "Rec. by", 20, 629, 46);
+        placeField(root, txtReceivedBy, 76, 625, 88, 22);
+
+        JButton boxTotal = FoxProTheme.createButton("BOX TOTAL");
+        boxTotal.setBounds(s(16), s(654), s(104), s(24));
+        boxTotal.addActionListener(e -> CisDialogs.showInfo(this, "Current box quantity: " + txtBoxQty.getText()));
+        root.add(boxTotal);
+
         JButton findBox = FoxProTheme.createButton("Find Box No.");
-        findBox.addActionListener(e -> CisDialogs.showInfo(this, "Find Box No. will be wired after the core invoice path is stable."));
-        boxPanel.add(findBox);
-        panel.add(boxPanel, BorderLayout.SOUTH);
-        return panel;
-    }
+        findBox.setBounds(s(398), s(520), s(98), s(24));
+        findBox.addActionListener(e -> findBoxNumber());
+        root.add(findBox);
 
-    private JPanel buildFooter() {
-        JPanel panel = new JPanel(new BorderLayout(10, 10));
-        panel.setBackground(FoxProTheme.PANEL);
+        addRightTotal(root, "Discount", txtDiscountPercent, 624, 514);
+        addRightTotal(root, "DOA", txtDoa, 624, 542);
+        addRightTotal(root, "RATE", txtRate2, 624, 570);
+        addRightTotal(root, "FREIGHT", txtFreight, 624, 598);
+        addRightTotal(root, "Packing Charges", txtPackingCharges, 560, 626);
+        addRightTotal(root, "PRODUCT SALES", txtProductSales, 558, 654);
+        addRightTotal(root, "TOTAL PAYABLES", txtTotalPayables, 550, 682);
+        txtFreight.setEditable(false);
+        txtProductSales.setEditable(false);
+        txtTotalPayables.setEditable(false);
 
-        JPanel signatures = new JPanel(new GridBagLayout());
-        signatures.setBackground(FoxProTheme.PANEL);
-        signatures.setBorder(FoxProTheme.sectionBorder("Signatures"));
-        addSimpleField(signatures, 0, "Prep.by", txtPreparedBy);
-        addSimpleField(signatures, 1, "Check by", txtCheckedBy);
-        addSimpleField(signatures, 2, "App.by", txtApprovedBy);
-        addSimpleField(signatures, 3, "Rec. by", txtReceivedBy);
-
-        JPanel totals = new JPanel(new GridBagLayout());
-        totals.setBackground(FoxProTheme.PANEL);
-        totals.setBorder(FoxProTheme.sectionBorder("Computed Totals"));
-        addSimpleField(totals, 0, "Discount", txtDiscountPercent);
-        addSimpleField(totals, 1, "DOA", txtDoa);
-        addSimpleField(totals, 2, "RATE", txtRate2);
-        addSimpleField(totals, 3, "FREIGHT", txtFreight);
-        addSimpleField(totals, 4, "Packing Charges", txtPackingCharges);
-        addSimpleField(totals, 5, "PRODUCT SALES", txtProductSales);
-        addSimpleField(totals, 6, "TOTAL PAYABLES", txtTotalPayables);
-
-        JButton printLabels = FoxProTheme.createButton("Print Labels");
-        printLabels.setPreferredSize(new Dimension(120, 120));
+        JButton printLabels = FoxProTheme.createButton("Print\nLabels");
+        printLabels.setBounds(s(866), s(548), s(58), s(72));
         printLabels.addActionListener(e -> openPrintPreview());
+        root.add(printLabels);
 
-        JPanel actions = new JPanel(new FlowLayout(FlowLayout.CENTER, 8, 0));
-        actions.setBackground(FoxProTheme.PANEL);
-        JButton add = FoxProTheme.createButton("Add");
-        JButton edit = FoxProTheme.createButton("Edit");
-        JButton delete = FoxProTheme.createButton("Delete");
-        JButton save = FoxProTheme.createButton("Save");
-        JButton exit = FoxProTheme.createButton("Exit");
-        JButton cancelRecall = FoxProTheme.createButton("Cancel/Recall");
-        add.addActionListener(e -> addLine());
-        edit.addActionListener(e -> editLine());
-        delete.addActionListener(e -> deleteLine());
-        save.addActionListener(e -> saveRecord());
-        exit.addActionListener(e -> dispose());
-        cancelRecall.addActionListener(e -> dispose());
-        actions.add(add);
-        actions.add(edit);
-        actions.add(delete);
-        actions.add(save);
-        actions.add(exit);
-        actions.add(cancelRecall);
-
-        JPanel center = new JPanel(new BorderLayout(10, 10));
-        center.setBackground(FoxProTheme.PANEL);
-        center.add(totals, BorderLayout.CENTER);
-        center.add(printLabels, BorderLayout.EAST);
-
-        panel.add(signatures, BorderLayout.WEST);
-        panel.add(center, BorderLayout.CENTER);
-        panel.add(actions, BorderLayout.SOUTH);
-        return panel;
+        addActionButton(root, "Add", 330, 654, e -> addLine());
+        addActionButton(root, "Edit", 420, 654, e -> editLine());
+        addActionButton(root, "Delete", 510, 654, e -> deleteLine());
+        addActionButton(root, "Save", 600, 654, e -> saveRecord());
+        addActionButton(root, "Exit", 690, 654, e -> dispose());
+        addActionButton(root, "Cancel/Recall", 780, 654, e -> dispose());
     }
 
-    private JButton lookupButton(Runnable action) {
+    private void addRightTotal(JPanel root, String label, JTextField field, int labelX, int y) {
+        addLabel(root, label, labelX, y + 4, 72);
+        placeField(root, field, 760, y, 82, 22);
+    }
+
+    private void addActionButton(JPanel root, String text, int x, int y, java.awt.event.ActionListener listener) {
+        JButton button = FoxProTheme.createButton(text);
+        button.setBounds(s(x), s(y), s(82), s(24));
+        button.addActionListener(listener);
+        root.add(button);
+    }
+
+    private void addLabel(JPanel root, String text, int x, int y, int width) {
+        JLabel label = new JLabel(text);
+        label.setFont(FoxProTheme.FONT);
+        label.setBounds(s(x), s(y), s(width), s(18));
+        root.add(label);
+    }
+
+    private void addCenteredLabel(JPanel root, String text, int x, int y, int width) {
+        JLabel label = new JLabel(text, SwingConstants.CENTER);
+        label.setFont(FoxProTheme.FONT);
+        label.setBounds(s(x), s(y), s(width), s(16));
+        root.add(label);
+    }
+
+    private JTextField field(int columns) {
+        return FoxProTheme.createTextField(columns);
+    }
+
+    private JTextField numericField(int columns) {
+        JTextField field = FoxProTheme.createTextField(columns);
+        field.setHorizontalAlignment(SwingConstants.RIGHT);
+        return field;
+    }
+
+    private void placeField(JPanel root, JTextField field, int x, int y, int width, int height) {
+        field.setBounds(s(x), s(y), s(width), s(height));
+        root.add(field);
+    }
+
+    private void placeReadOnly(JPanel root, JTextField field, int x, int y, int width, int height) {
+        field.setEditable(false);
+        placeField(root, field, x, y, width, height);
+    }
+
+    private void addLookupButton(JPanel root, int x, int y, Runnable action) {
         JButton button = FoxProTheme.createLookupButton();
+        button.setBounds(s(x), s(y), s(24), s(22));
         button.addActionListener(e -> action.run());
-        return button;
-    }
-
-    private void addField(JPanel panel, GridBagConstraints gbc, int row, int col, String label, JComponent primary, JComponent extra, JComponent secondary) {
-        gbc.gridx = col;
-        gbc.gridy = row;
-        gbc.weightx = 0;
-        panel.add(new JLabel(label), gbc);
-        gbc.gridx = col + 1;
-        gbc.weightx = 0.15;
-        panel.add(primary, gbc);
-        if (extra != null) {
-            gbc.gridx = col + 2;
-            gbc.weightx = 0;
-            panel.add(extra, gbc);
-        }
-        if (secondary != null) {
-            gbc.gridx = col + 3;
-            gbc.weightx = 0.45;
-            panel.add(secondary, gbc);
-        }
-    }
-
-    private void addMetric(JPanel panel, int index, String label, JTextField field) {
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(2, 4, 2, 4);
-        gbc.gridx = index;
-        gbc.gridy = 0;
-        panel.add(new JLabel(label), gbc);
-        gbc.gridy = 1;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.weightx = 1;
-        panel.add(field, gbc);
-    }
-
-    private void addSimpleField(JPanel panel, int row, String label, JTextField field) {
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(4, 6, 4, 6);
-        gbc.gridx = 0;
-        gbc.gridy = row;
-        gbc.anchor = GridBagConstraints.WEST;
-        panel.add(new JLabel(label), gbc);
-        gbc.gridx = 1;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.weightx = 1;
-        panel.add(field, gbc);
+        root.add(button);
     }
 
     private void openProformaLookup() {
@@ -388,6 +392,7 @@ public class SalesInvoiceEntryDialog extends FoxProChildDialog {
             workflowDAO.save(record);
             saved = true;
             CisDialogs.showInfo(this, "Sales Invoice saved.");
+            dispose();
         } catch (Exception e) {
             CisDialogs.showError(this, e.getMessage());
         }
@@ -436,8 +441,8 @@ public class SalesInvoiceEntryDialog extends FoxProChildDialog {
         txtInvoiceNo.setText(nullToBlank(record.getInvoiceNo()));
         txtInvoiceDate.setText(record.getInvoiceDate() == null ? "" : record.getInvoiceDate().toString());
         txtExchangeRate.setText(record.getExchangeRate().toPlainString());
-        txtAwbNo.setText(record.getAwbNo());
-        txtBroker.setText(record.getBroker());
+        txtAwbNo.setText(nullToBlank(record.getAwbNo()));
+        txtBroker.setText(nullToBlank(record.getBroker()));
         txtCustomerCode.setText(nullToBlank(record.getCustomerCode()));
         txtCustomerName.setText(nullToBlank(record.getCustomerName()));
         txtBranchCode.setText(nullToBlank(record.getBranchCode()));
@@ -446,7 +451,7 @@ public class SalesInvoiceEntryDialog extends FoxProChildDialog {
         txtSalesmanName.setText(nullToBlank(record.getSalesmanName()));
         txtCurrencyCode.setText(nullToBlank(record.getCurrencyCode()));
         txtCurrencyName.setText(nullToBlank(record.getCurrencyName()));
-        cboPricing.setSelectedItem(record.getPricingCode() == null ? "B" : record.getPricingCode().toUpperCase());
+        selectPricingDisplay(record.getPricingCode());
         chkApplyFormula.setSelected(record.isApplyFormula());
         chkConsumables.setSelected(record.isConsumables());
         txtBoxQty.setText(record.getBoxQty().toPlainString());
@@ -458,10 +463,10 @@ public class SalesInvoiceEntryDialog extends FoxProChildDialog {
         txtRate.setText(record.getRateAmount().toPlainString());
         txtVat.setText(record.getVatAmount().toPlainString());
         txtStamp.setText(record.getStampAmount().toPlainString());
-        txtPreparedBy.setText(record.getPreparedBy());
-        txtCheckedBy.setText(record.getCheckedBy());
-        txtApprovedBy.setText(record.getApprovedByName());
-        txtReceivedBy.setText(record.getReceivedBy());
+        txtPreparedBy.setText(nullToBlank(record.getPreparedBy()));
+        txtCheckedBy.setText(nullToBlank(record.getCheckedBy()));
+        txtApprovedBy.setText(nullToBlank(record.getApprovedByName()));
+        txtReceivedBy.setText(nullToBlank(record.getReceivedBy()));
         txtDiscountPercent.setText(record.getDiscountPercent().toPlainString());
         txtDoa.setText(record.getDoaAmount().toPlainString());
         txtRate2.setText(record.getRate2Amount().toPlainString());
@@ -469,6 +474,7 @@ public class SalesInvoiceEntryDialog extends FoxProChildDialog {
         txtPackingCharges.setText(record.getPackingCharges().toPlainString());
         txtProductSales.setText(record.getProductSalesAmount().toPlainString());
         txtTotalPayables.setText(record.getTotalPayables().toPlainString());
+        fillDerivedNames();
         suppressUpdates = false;
     }
 
@@ -488,7 +494,7 @@ public class SalesInvoiceEntryDialog extends FoxProChildDialog {
         record.setSalesmanName(txtSalesmanName.getText().trim());
         record.setCurrencyCode(txtCurrencyCode.getText().trim().isBlank() ? "USD" : txtCurrencyCode.getText().trim());
         record.setCurrencyName(txtCurrencyName.getText().trim());
-        record.setPricingCode(String.valueOf(cboPricing.getSelectedItem()));
+        record.setPricingCode(extractPricingCode());
         record.setApplyFormula(chkApplyFormula.isSelected());
         record.setConsumables(chkConsumables.isSelected());
         record.setBoxQty(decimal(txtBoxQty));
@@ -523,6 +529,11 @@ public class SalesInvoiceEntryDialog extends FoxProChildDialog {
                     line.getTotalPrice().toPlainString()
             });
         }
+        if (lineModel.getRowCount() > 0) {
+            int row = lineModel.getRowCount() - 1;
+            lineTable.setRowSelectionInterval(row, row);
+            lineTable.scrollRectToVisible(lineTable.getCellRect(row, 0, true));
+        }
     }
 
     private void openPrintPreview() {
@@ -541,6 +552,58 @@ public class SalesInvoiceEntryDialog extends FoxProChildDialog {
         new SalesInvoicePrintDialog(SwingUtilities.getWindowAncestor(this), text).setVisible(true);
     }
 
+    private void findBoxNumber() {
+        String box = javax.swing.JOptionPane.showInputDialog(this, "Find Box No.");
+        if (box == null || box.isBlank()) {
+            return;
+        }
+        String lookFor = box.trim().toUpperCase();
+        for (int i = 0; i < record.getLines().size(); i++) {
+            SalesInvoiceLine line = record.getLines().get(i);
+            if (nullToBlank(line.getBoxNo()).toUpperCase().contains(lookFor)) {
+                lineTable.setRowSelectionInterval(i, i);
+                lineTable.scrollRectToVisible(lineTable.getCellRect(i, 0, true));
+                return;
+            }
+        }
+        CisDialogs.showInfo(this, "No matching box number found.");
+    }
+
+    private void fillDerivedNames() {
+        if (txtBranchName.getText().isBlank() && !txtBranchCode.getText().isBlank()) {
+            LookupItem branch = lookupDAO.findBranchByCode(txtBranchCode.getText().trim());
+            if (branch != null) {
+                txtBranchName.setText(branch.getName());
+            }
+        }
+        if (txtCurrencyName.getText().isBlank() && !txtCurrencyCode.getText().isBlank()) {
+            LookupItem currency = lookupDAO.findCurrencyByCode(txtCurrencyCode.getText().trim());
+            if (currency != null) {
+                txtCurrencyName.setText(currency.getName());
+            }
+        }
+    }
+
+    private void selectPricingDisplay(String pricingCode) {
+        String code = pricingCode == null || pricingCode.isBlank() ? "B" : pricingCode.substring(0, 1).toUpperCase();
+        for (String option : PRICING_OPTIONS) {
+            if (option.startsWith(code)) {
+                cboPricing.setSelectedItem(option);
+                return;
+            }
+        }
+        cboPricing.setSelectedItem("B - US/SQ/EU");
+    }
+
+    private String extractPricingCode() {
+        Object selected = cboPricing.getSelectedItem();
+        if (selected == null) {
+            return "B";
+        }
+        String value = selected.toString().trim();
+        return value.isEmpty() ? "B" : value.substring(0, 1).toUpperCase();
+    }
+
     private BigDecimal decimal(JTextField field) {
         String text = field.getText().trim();
         return text.isBlank() ? BigDecimal.ZERO : new BigDecimal(text);
@@ -548,5 +611,9 @@ public class SalesInvoiceEntryDialog extends FoxProChildDialog {
 
     private String nullToBlank(String value) {
         return value == null ? "" : value;
+    }
+
+    private int s(int value) {
+        return CisScale.scale(value);
     }
 }

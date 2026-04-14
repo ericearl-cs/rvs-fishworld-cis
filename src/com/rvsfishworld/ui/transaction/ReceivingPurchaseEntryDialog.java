@@ -1,6 +1,7 @@
 package com.rvsfishworld.ui.transaction;
 
 import com.rvsfishworld.ui.FoxProTheme;
+import com.rvsfishworld.ui.core.CisScale;
 import com.rvsfishworld.ui.generic.LookupDialog;
 
 import com.rvsfishworld.dao.LookupDAO;
@@ -84,7 +85,7 @@ public class ReceivingPurchaseEntryDialog extends JDialog {
         super(owner, header == null ? "Receiving of Fish Purchases" : "Edit Receiving of Fish Purchases", ModalityType.APPLICATION_MODAL);
         this.editingHeader = header;
         FoxProTheme.applyGlobalFont();
-        setSize(1380, 760);
+        setSize(CisScale.scale(1380), CisScale.scale(760));
         setLocationRelativeTo(owner);
         setResizable(false);
         buildUi();
@@ -199,7 +200,7 @@ public class ReceivingPurchaseEntryDialog extends JDialog {
         btnDelete.addActionListener(e -> deleteLine());
         btnSave.addActionListener(e -> saveTransaction());
         btnExit.addActionListener(e -> dispose());
-        btnFindBoxNo.addActionListener(e -> Toolkit.getDefaultToolkit().beep());
+        btnFindBoxNo.addActionListener(e -> findBoxNo());
         btnFindBoxNo.setPreferredSize(new Dimension(132, 32));
 
         JPanel metaLine = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 0));
@@ -575,6 +576,24 @@ public class ReceivingPurchaseEntryDialog extends JDialog {
         lines.clear();
         lines.addAll(header.getLines());
         refreshLineTable();
+    }
+
+    private void findBoxNo() {
+        String keyword = JOptionPane.showInputDialog(this, "Find Box No.");
+        if (keyword == null || keyword.isBlank()) {
+            return;
+        }
+        String lookFor = keyword.trim().toUpperCase();
+        for (int i = 0; i < lines.size(); i++) {
+            ReceivingLine line = lines.get(i);
+            if (nullToBlank(line.getTank()).toUpperCase().contains(lookFor)
+                    || nullToBlank(line.getProductCode()).toUpperCase().contains(lookFor)) {
+                lineTable.setRowSelectionInterval(i, i);
+                lineTable.scrollRectToVisible(lineTable.getCellRect(i, 0, true));
+                return;
+            }
+        }
+        JOptionPane.showMessageDialog(this, "No matching box number found.");
     }
 
     public boolean isSaved() {

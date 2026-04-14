@@ -29,13 +29,13 @@ public class ReceivingPurchaseInternalFrame extends JInternalFrame {
 
     private final JTable table = new JTable(model);
     private final JPanel topBar = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
-    private int selectedOrderIndex = 2;
+    private int selectedOrderIndex = 0;
     private final List<ReceivingDAO.BrowseRow> browseRows = new ArrayList<>();
 
     public ReceivingPurchaseInternalFrame() {
         super("RECEIVING OF FISH PURCHASES", true, true, true, true);
         FoxProTheme.applyGlobalFont();
-        setSize(CisScale.scale(1180), CisScale.scale(620));
+        setSize(CisScale.scale(860), CisScale.scale(430));
         setLayout(new BorderLayout());
 
         JPanel root = new JPanel(new BorderLayout(CisScale.scale(8), CisScale.scale(8)));
@@ -77,11 +77,11 @@ public class ReceivingPurchaseInternalFrame extends JInternalFrame {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBackground(FoxProTheme.PANEL);
 
-        addCommand(panel, "Find", e -> loadRows());
+        addCommand(panel, "Find", e -> findRow());
         addCommand(panel, "Add", e -> openAddDialog());
         addCommand(panel, "Edit", e -> openEditDialog());
         addCommand(panel, "Delete", e -> deleteSelected());
-        addCommand(panel, "Cancel / Recall", e -> toggleCancelRecall());
+        addCommand(panel, "Cancel/Recall", e -> toggleCancelRecall());
         addCommand(panel, "Print", e -> openPrintDialog());
         addCommand(panel, "C.V.", e -> openCvDialog());
         addCommand(panel, "Exit", e -> doDefaultCloseAction());
@@ -90,15 +90,21 @@ public class ReceivingPurchaseInternalFrame extends JInternalFrame {
 
     private void addCommand(JPanel panel, String label, java.awt.event.ActionListener listener) {
         JButton button = FoxProTheme.createButton(label);
-        button.setMaximumSize(new Dimension(CisScale.scale(120), CisScale.scale(34)));
+        button.setMaximumSize(new Dimension(CisScale.scale(82), CisScale.scale(26)));
         button.addActionListener(listener);
         panel.add(button);
-        panel.add(Box.createVerticalStrut(CisScale.scale(8)));
+        panel.add(Box.createVerticalStrut(CisScale.scale(4)));
     }
 
     private JScrollPane buildGrid() {
         FoxProTheme.styleTable(table);
-        table.setRowHeight(CisScale.scale(22));
+        table.setRowHeight(CisScale.scale(18));
+        table.setSelectionBackground(new Color(246, 142, 255));
+        table.setSelectionForeground(Color.BLACK);
+        int[] widths = {84, 72, 144, 56, 74, 76, 74, 74, 74};
+        for (int i = 0; i < widths.length; i++) {
+            table.getColumnModel().getColumn(i).setPreferredWidth(CisScale.scale(widths[i]));
+        }
         table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
@@ -220,10 +226,33 @@ public class ReceivingPurchaseInternalFrame extends JInternalFrame {
                 values[8] = amountFormat.format(values[8]);
                 model.addRow(values);
             }
+            if (model.getRowCount() > 0) {
+                int row = model.getRowCount() - 1;
+                table.setRowSelectionInterval(row, row);
+                table.scrollRectToVisible(table.getCellRect(row, 0, true));
+            }
         } catch (Exception e) {
             model.setRowCount(0);
             model.addRow(new Object[]{"ERROR", e.getMessage(), "Run the updated SQL patch first.", "", "", "", "", "", ""});
         }
+    }
+
+    private void findRow() {
+        String keyword = JOptionPane.showInputDialog(this, "Find R.R. No. / Supplier Code / Supplier Name");
+        if (keyword == null || keyword.isBlank()) {
+            return;
+        }
+        String lookFor = keyword.trim().toUpperCase();
+        for (int i = 0; i < browseRows.size(); i++) {
+            ReceivingDAO.BrowseRow row = browseRows.get(i);
+            String haystack = (row.getRrNo() + " " + row.getSupplierCode() + " " + row.getSupplierName()).toUpperCase();
+            if (haystack.contains(lookFor)) {
+                table.setRowSelectionInterval(i, i);
+                table.scrollRectToVisible(table.getCellRect(i, 0, true));
+                return;
+            }
+        }
+        JOptionPane.showMessageDialog(this, "No matching receiving record found.");
     }
 }
 

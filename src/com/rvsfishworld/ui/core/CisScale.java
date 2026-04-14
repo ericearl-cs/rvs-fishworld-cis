@@ -3,7 +3,7 @@ package com.rvsfishworld.ui.core;
 import java.awt.Dimension;
 
 public final class CisScale {
-    private static final double SCALE = 1.2d;
+    private static final double SCALE = 1.15d;
 
     private CisScale() {
     }

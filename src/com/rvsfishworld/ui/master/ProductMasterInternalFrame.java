@@ -1,12 +1,16 @@
 package com.rvsfishworld.ui.master;
 
+import com.rvsfishworld.dao.MasterFileDAO;
+import com.rvsfishworld.ui.core.CisDialogs;
 import com.rvsfishworld.ui.generic.DataBrowseInternalFrame;
 import com.rvsfishworld.ui.core.CisScale;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 public class ProductMasterInternalFrame extends DataBrowseInternalFrame {
+    private final MasterFileDAO dao = new MasterFileDAO();
     private static final String PRODUCT_BROWSE_SQL = """
             SELECT
                 p.product_code,
@@ -28,6 +32,7 @@ public class ProductMasterInternalFrame extends DataBrowseInternalFrame {
                 COALESCE(p.deliveries_price, 0)
             FROM products p
             LEFT JOIN categories c ON c.category_id = p.category_id
+            WHERE p.is_active = TRUE
             """;
 
     public ProductMasterInternalFrame() {
@@ -62,9 +67,13 @@ public class ProductMasterInternalFrame extends DataBrowseInternalFrame {
     @Override
     protected void handleCommand(String label) {
         switch (label.toUpperCase()) {
-            case "ADD" -> openDialog("Add Product", Map.of(), false);
-            case "VIEW" -> openDialog("View Product", selectedValues(), true);
-            case "EDIT" -> openDialog("Edit Product", selectedValues(), false);
+            case "FIND" -> findProduct();
+            case "ADD" -> openDialog("Adding Of Product", Map.of(), false);
+            case "VIEW" -> openSelectedDialog("Viewing Of Product", true);
+            case "EDIT" -> openSelectedDialog("Editing Of Product", false);
+            case "DELETE" -> deleteSelected();
+            case "PRINT" -> openPrintDialog();
+            case "COMPONENT" -> openComponentDialog();
             default -> super.handleCommand(label);
         }
     }
@@ -74,6 +83,83 @@ public class ProductMasterInternalFrame extends DataBrowseInternalFrame {
         dialog.setVisible(true);
         if (dialog.isSaved()) {
             loadRows();
+        }
+    }
+
+    private void openSelectedDialog(String title, boolean readOnly) {
+        Map<String, Object> values = fullSelectedValues();
+        if (values.isEmpty()) {
+            CisDialogs.showInfo(this, "Select a product first.");
+            return;
+        }
+        openDialog(title, values, readOnly);
+    }
+
+    private void findProduct() {
+        String keyword = JOptionPane.showInputDialog(this, "Find Product Code / Description / Scientific Name", "");
+        if (keyword == null || keyword.isBlank()) {
+            return;
+        }
+        String needle = keyword.trim().toUpperCase();
+        for (int row = 0; row < getTable().getRowCount(); row++) {
+            for (int col = 0; col < Math.min(3, getTable().getColumnCount()); col++) {
+                Object value = getTable().getValueAt(row, col);
+                if (value != null && value.toString().toUpperCase().contains(needle)) {
+                    getTable().setRowSelectionInterval(row, row);
+                    getTable().scrollRectToVisible(getTable().getCellRect(row, 0, true));
+                    return;
+                }
+            }
+        }
+        CisDialogs.showInfo(this, "No matching product found.");
+    }
+
+    private void deleteSelected() {
+        String code = selectedCode();
+        if (code.isBlank()) {
+            CisDialogs.showInfo(this, "Select a product first.");
+            return;
+        }
+        int answer = CisDialogs.askYesNo(this, "Delete Product", "Delete product " + code + "?");
+        if (answer != CisDialogs.YES) {
+            return;
+        }
+        try {
+            dao.deleteProduct(code);
+            loadRows();
+        } catch (RuntimeException e) {
+            CisDialogs.showError(this, e.getMessage());
+        }
+    }
+
+    private void openPrintDialog() {
+        ProductPrintDialog dialog = new ProductPrintDialog(SwingUtilities.getWindowAncestor(this), selectedCode());
+        dialog.setVisible(true);
+    }
+
+    private void openComponentDialog() {
+        Map<String, Object> values = selectedValues();
+        if (values.isEmpty()) {
+            CisDialogs.showInfo(this, "Select a product first.");
+            return;
+        }
+        ProductComponentDialog dialog = new ProductComponentDialog(
+                SwingUtilities.getWindowAncestor(this),
+                stringValue(values.get("product_code")),
+                stringValue(values.get("description")));
+        dialog.setVisible(true);
+    }
+
+    private Map<String, Object> fullSelectedValues() {
+        String code = selectedCode();
+        if (code.isBlank()) {
+            return Map.of();
+        }
+        try {
+            return dao.findProduct(code);
+        } catch (RuntimeException e) {
+            CisDialogs.showError(this, e.getMessage());
+            return Map.of();
         }
     }
 
@@ -102,6 +188,15 @@ public class ProductMasterInternalFrame extends DataBrowseInternalFrame {
         values.put("local_sales_price", getModel().getValueAt(modelRow, 15));
         values.put("deliveries_price", getModel().getValueAt(modelRow, 16));
         return values;
+    }
+
+    private String selectedCode() {
+        Map<String, Object> values = selectedValues();
+        return stringValue(values.get("product_code"));
+    }
+
+    private String stringValue(Object value) {
+        return value == null ? "" : value.toString().trim();
     }
 }
 

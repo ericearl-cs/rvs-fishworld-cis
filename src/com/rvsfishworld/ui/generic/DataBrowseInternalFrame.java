@@ -50,13 +50,13 @@ public class DataBrowseInternalFrame extends JInternalFrame {
         this.table = new JTable(model);
 
         FoxProTheme.applyGlobalFont();
-        setSize(CisScale.scale(1020), CisScale.scale(660));
+        setSize(CisScale.scale(760), CisScale.scale(420));
         setLayout(new BorderLayout());
 
         JPanel root = new JPanel(new BorderLayout(CisScale.scale(8), CisScale.scale(8)));
         root.setBackground(FoxProTheme.PANEL);
         root.setBorder(BorderFactory.createEmptyBorder(
-                CisScale.scale(10), CisScale.scale(10), CisScale.scale(10), CisScale.scale(10)));
+                CisScale.scale(6), CisScale.scale(6), CisScale.scale(6), CisScale.scale(6)));
 
         root.add(buildTopBar(), BorderLayout.NORTH);
         root.add(buildCommandBar(), BorderLayout.WEST);
@@ -69,7 +69,7 @@ public class DataBrowseInternalFrame extends JInternalFrame {
 
     private JPanel buildTopBar() {
         topBar.setBackground(FoxProTheme.PANEL);
-        topBar.setBorder(BorderFactory.createEmptyBorder(0, 0, CisScale.scale(2), 0));
+        topBar.setBorder(BorderFactory.createEmptyBorder(0, 0, CisScale.scale(1), 0));
         refreshOrderButtons();
         return topBar;
     }
@@ -98,11 +98,11 @@ public class DataBrowseInternalFrame extends JInternalFrame {
 
         for (String label : commandButtons) {
             JButton button = FoxProTheme.createButton(label);
-            button.setMaximumSize(new Dimension(CisScale.scale(104), CisScale.scale(30)));
+            button.setMaximumSize(new Dimension(CisScale.scale(94), CisScale.scale(28)));
             button.setAlignmentX(Component.LEFT_ALIGNMENT);
             button.addActionListener(e -> handleCommand(label));
             panel.add(button);
-            panel.add(Box.createVerticalStrut(CisScale.scale(6)));
+            panel.add(Box.createVerticalStrut(CisScale.scale(5)));
         }
         return panel;
     }
@@ -126,9 +126,11 @@ public class DataBrowseInternalFrame extends JInternalFrame {
     private JScrollPane buildCenter() {
         FoxProTheme.styleTable(table);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        table.setFillsViewportHeight(true);
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.getViewport().setBackground(Color.WHITE);
         scrollPane.setBorder(BorderFactory.createLineBorder(FoxProTheme.GRID));
+        scrollPane.getHorizontalScrollBar().setUnitIncrement(12);
         return scrollPane;
     }
 
@@ -156,7 +158,7 @@ public class DataBrowseInternalFrame extends JInternalFrame {
             TableColumn column = table.getColumnModel().getColumn(i);
             int scaledWidth = CisScale.scale(widths[i]);
             column.setPreferredWidth(scaledWidth);
-            column.setMinWidth(Math.min(scaledWidth, CisScale.scale(40)));
+            column.setMinWidth(Math.min(scaledWidth, CisScale.scale(28)));
         }
     }
 

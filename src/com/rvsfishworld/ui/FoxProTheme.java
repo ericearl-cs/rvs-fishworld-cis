@@ -15,8 +15,8 @@ public class FoxProTheme {
     public static final Color NAVY = new Color(0, 0, 153);
     public static final Color WHITE = Color.WHITE;
     public static final Color GRID = new Color(160, 160, 160);
-    public static final Font FONT = new Font("Tahoma", Font.PLAIN, CisScale.scale(11));
-    public static final Font FONT_BOLD = new Font("Tahoma", Font.BOLD, CisScale.scale(12));
+    public static final Font FONT = new Font("Tahoma", Font.PLAIN, CisScale.scale(10));
+    public static final Font FONT_BOLD = new Font("Tahoma", Font.BOLD, CisScale.scale(10));
 
     public static void applyGlobalFont() {
         UIManager.put("Label.font", FONT);
@@ -36,7 +36,8 @@ public class FoxProTheme {
         JButton button = new JButton(text);
         button.setFont(FONT);
         button.setFocusPainted(false);
-        button.setPreferredSize(new Dimension(CisScale.scale(104), CisScale.scale(30)));
+        button.setMargin(new Insets(0, 8, 0, 8));
+        button.setPreferredSize(new Dimension(CisScale.scale(84), CisScale.scale(28)));
         button.setBackground(WHITE);
         button.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
         return button;
@@ -46,7 +47,7 @@ public class FoxProTheme {
         JButton button = new JButton(new BinocularIcon());
         button.setFont(FONT);
         button.setFocusPainted(false);
-        button.setPreferredSize(new Dimension(CisScale.scale(30), CisScale.scale(24)));
+        button.setPreferredSize(new Dimension(CisScale.scale(24), CisScale.scale(22)));
         button.setBackground(PANEL);
         button.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
         return button;
@@ -57,7 +58,8 @@ public class FoxProTheme {
         button.setFont(FONT_BOLD);
         button.setFocusPainted(false);
         button.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-        button.setPreferredSize(new Dimension(CisScale.scale(220), CisScale.scale(28)));
+        button.setMargin(new Insets(0, 8, 0, 8));
+        button.setPreferredSize(new Dimension(CisScale.scale(154), CisScale.scale(24)));
         if (selected) {
             button.setBackground(NAVY);
             button.setForeground(WHITE);
@@ -105,14 +107,16 @@ public class FoxProTheme {
 
     public static void styleTable(JTable table) {
         table.setFont(FONT);
-        table.setRowHeight(CisScale.scale(22));
+        table.setRowHeight(CisScale.scale(18));
         table.setGridColor(GRID);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.setShowGrid(true);
         table.setIntercellSpacing(new Dimension(1, 1));
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
         JTableHeader header = table.getTableHeader();
-        header.setFont(FONT_BOLD.deriveFont((float) CisScale.scale(11)));
+        header.setFont(FONT_BOLD);
+        header.setPreferredSize(new Dimension(header.getPreferredSize().width, CisScale.scale(18)));
         header.setReorderingAllowed(false);
         header.setBackground(WHITE);
         header.setForeground(Color.BLACK);

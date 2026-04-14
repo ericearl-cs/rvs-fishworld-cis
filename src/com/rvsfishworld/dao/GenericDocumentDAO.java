@@ -148,6 +148,26 @@ public class GenericDocumentDAO {
         }
     }
 
+    public void toggleProformaCancelRecall(long documentId) {
+        String sql = """
+                UPDATE generic_documents
+                SET status = CASE
+                        WHEN UPPER(COALESCE(status, 'OPEN')) = 'CANCELLED' THEN 'OPEN'
+                        ELSE 'CANCELLED'
+                    END,
+                    updated_by = 'SYSTEM',
+                    updated_at = CURRENT_TIMESTAMP
+                WHERE document_id = ? AND document_type = 'PROFORMA'
+                """;
+        try (Connection conn = Database.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setLong(1, documentId);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            throw new RuntimeException("Unable to cancel/recall Proforma: " + e.getMessage(), e);
+        }
+    }
+
     private void loadProformaLines(Connection conn, ProformaRecord record) throws Exception {
         String sql = """
                 SELECT document_line_id, line_no, trans_shipper_code, box_no, product_code,
